@@ -1,0 +1,21 @@
+.containerAll {
+    margin-top: 10%;
+    align-items: center;
+}
+
+#calcGrid {
+    display: flex;
+    margin: auto;
+    flex-wrap: wrap;
+    width: 120px;
+    height: 160px;
+    border-style: solid;
+    justify-content: space-around;
+    
+}
+
+button {
+    width: 33%;
+    margin: 0px;
+
+}
