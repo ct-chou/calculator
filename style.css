@@ -8,7 +8,7 @@
     margin: auto;
     flex-wrap:wrap;
     width: 160px;
-    height: 200px;
+    height: 250px;
     border-style: solid;
     justify-content: space-around;
 }
@@ -41,7 +41,22 @@
     margin: 0px;
 
 }
+#display {
+    display: table;
+    text-align: right;
+    height: 34px;
+    width: 100%;
+    margin: 2px;
+    border: 1px;
+    border-style: solid;
+    padding: 5px;
+}
 
+#display span {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: end;
+}
 #clear {
     width: 33%;
 }
