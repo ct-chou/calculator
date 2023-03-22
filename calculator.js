@@ -55,11 +55,13 @@ keyPad.forEach(keyEntry => {
             
         }
         else if(keyEntry.id == 'equals') {
+            //todo: press equal before operator does nothing
+            //todo: press equal 2x repeats the last operation 
             valueY = +displayValue;
             displayValue = operate(operation, valueX, valueY);
-            
         }
         else {
+            //todo: enter after chaining doesn't concat
             if(displayValue == 0) {
                 displayValue = keyEntry.id.toString();
             }
