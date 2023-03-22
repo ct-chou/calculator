@@ -17,7 +17,9 @@ const keyPad = document.querySelectorAll('button');
 const displayScreen = document.getElementById('displayScreen');
 
 let displayValue = 0;
-console.log(displayValue);
+let valueX = 0;
+let valueY = 0;
+let operation = '';
 
 keyPad.forEach(keyEntry => {
     keyEntry.addEventListener('click', (e) => {
@@ -34,9 +36,14 @@ keyPad.forEach(keyEntry => {
             }
         }
         else if(keyEntry.className == 'operator') {
-            console.log(keyEntry.id);
+            valueX = +displayValue;
+            displayValue = 0;
+            operation = keyEntry.id;
         }
-
+        else if(keyEntry.id == 'equals') {
+            valueY = +displayValue;
+            displayValue = operate(operation, valueX, valueY);
+        }
         else {
             if(displayValue == 0) {
                 displayValue = keyEntry.id.toString();
