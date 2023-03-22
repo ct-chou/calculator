@@ -20,11 +20,16 @@ let displayValue = 0;
 let valueX = 0;
 let valueY = 0;
 let operation = '';
+let chaining = false; // multiple operations
 
 keyPad.forEach(keyEntry => {
     keyEntry.addEventListener('click', (e) => {
         if(keyEntry.id == 'clear') {
             displayValue = 0;
+            chaining = false;
+            valueX = 0;
+            valueY = 0;
+            operation = '';
         }
         else if(keyEntry.id == 'delete') {
             if(displayValue != 0) {
@@ -35,13 +40,24 @@ keyPad.forEach(keyEntry => {
             }
         }
         else if(keyEntry.className == 'operator') {
-            valueX = +displayValue;
-            displayValue = 0;
+            if(chaining) {
+                displayValue = operate(operation, valueX, +displayValue);
+                valueX = +displayValue;
+                displayScreen.textContent = displayValue;            
+            }
+            else {
+                valueX = +displayValue;
+                displayValue = 0;
+                chaining = true;
+            }
+            
             operation = keyEntry.id;
+            
         }
         else if(keyEntry.id == 'equals') {
             valueY = +displayValue;
             displayValue = operate(operation, valueX, valueY);
+            
         }
         else {
             if(displayValue == 0) {
