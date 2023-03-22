@@ -23,7 +23,6 @@ let operation = '';
 
 keyPad.forEach(keyEntry => {
     keyEntry.addEventListener('click', (e) => {
-        // console.log(keyEntry.id);
         if(keyEntry.id == 'clear') {
             displayValue = 0;
         }
