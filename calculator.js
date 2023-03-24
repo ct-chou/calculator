@@ -21,12 +21,14 @@ let valueX = 0;
 let valueY = 0;
 let operation = '';
 let chaining = false; // multiple operations
+let equalSequence = true; // if True it means we hit = after = 
 
 keyPad.forEach(keyEntry => {
     keyEntry.addEventListener('click', (e) => {
         if(keyEntry.id == 'clear') {
             displayValue = 0;
             chaining = false;
+            equalSequence = true;
             valueX = 0;
             valueY = 0;
             operation = '';
@@ -44,26 +46,30 @@ keyPad.forEach(keyEntry => {
         else if(keyEntry.className == 'operator') {
             if(chaining) {
                 displayValue = operate(operation, valueX, +displayValue);
+            }
+            chaining = true;
+            if(!equalSequence) {
                 valueX = +displayValue;
                 displayScreen.textContent = displayValue;
-            }
-            else {
-                valueX = +displayValue;
-                displayScreen.textContent = displayValue;            
-                chaining = true;
             }
             displayValue = 0;            
             operation = keyEntry.id;
         }
         else if(keyEntry.id == 'equals') {
-            //todo: press equal before operator does nothing
-            //todo: press equal 2x repeats the last operation 
-            valueY = +displayValue;
-            displayValue = operate(operation, valueX, valueY);
-            displayScreen.textContent = displayValue;
+            if(operation != '') {
+                if(!equalSequence) {
+                    valueY = +displayValue;
+                }
+                displayValue = operate(operation, valueX, valueY);
+                displayScreen.textContent = displayValue;
+                valueX = +displayValue;
+                displayValue = 0;
+                equalSequence = true;
+                chaining = false;
+            }
         }
         else {
-            //todo: enter after chaining doesn't concat
+            equalSequence = false;
             if(displayValue == 0) {
                 displayValue = keyEntry.id.toString();
             }
