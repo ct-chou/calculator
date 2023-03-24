@@ -13,6 +13,14 @@ const operate = function(operation, x, y) {
     }
 }
 
+const scientificNotationFit = function(stringInput, position, digits) {
+    let leftSide = stringInput.substr(0,position -1);
+    let rightSide = stringInput.substr(position);
+
+    leftSide = Number.parseFloat(parseFloat(leftSide)).toFixed(digits - rightSide.length);
+    return leftSide.toString() + rightSide;
+}
+
 const keyPad = document.querySelectorAll('button');
 const displayScreen = document.getElementById('displayScreen');
 
@@ -95,6 +103,22 @@ keyPad.forEach(keyEntry => {
             displayScreen.textContent = displayValue;
         
         }
-        
+        let displayScreenString = displayScreen.textContent;
+        if(displayScreenString.length >= 18) {
+            ePosition = displayScreenString.indexOf('e');
+            console.log(parseFloat(displayScreenString));
+            if(ePosition == -1) {  //no scientific notation
+                let displayScreenFloat = parseFloat(displayScreenString);
+                if(displayScreenFloat >= 1e16) {
+                    displayScreen.textContent = displayScreenFloat.toExponential(6);    
+                }
+                else {
+                    displayScreen.textContent = Number.parseFloat(parseFloat(displayScreen.textContent)).toFixed(10);
+                }
+            }
+            else { // scientific notation
+                displayScreen.textContent = scientificNotationFit(displayScreen.textContent, ePosition, 10);
+            }
+        }
     });
 });
