@@ -1,3 +1,7 @@
+* {
+    font-size: 30px;
+}
+
 .containerAll {
     margin-top: 10%;
     align-items: center;
@@ -7,16 +11,16 @@
     display: flex;
     margin: auto;
     flex-wrap:wrap;
-    width: 160px;
-    height: 250px;
+    width: 320px;
+    height: 500px;
     border-style: solid;
     justify-content: space-around;
 }
 
 #clearPad {
     display: flex;
-    width: 160px;
-    height: 40px;
+    width: 320px;
+    height: 80px;
     justify-content: space-around;
 }
 
@@ -24,16 +28,16 @@
     display: flex;
     margin: auto;
     flex-wrap: wrap;
-    width: 120px;
-    height: 160px;
+    width: 240px;
+    height: 320px;
     justify-content: space-around;
 }
 
 #operatorPad {
     display: flex;
     flex-wrap: wrap;
-    width: 40px;
-    height: 160px;
+    width: 80px;
+    height: 320px;
 }
 
 #numberPad button {
@@ -44,12 +48,12 @@
 #display {
     display: table;
     text-align: right;
-    height: 34px;
+    height: 68px;
     width: 100%;
-    margin: 2px;
-    border: 1px;
+    margin: 4px;
+    border: 2px;
     border-style: solid;
-    padding: 5px;
+    padding: 10px;
 }
 
 #display span {
