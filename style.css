@@ -59,12 +59,18 @@
 }
 #clear {
     width: 33%;
+    color:darkred;
 }
 
 #delete {
     width: 66%;
+    color: red;
 }
 
 #operatorPad button {
     width: 100%;
+}
+
+.operator {
+    color: blue;
 }
