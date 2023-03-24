@@ -54,9 +54,10 @@ keyPad.forEach(keyEntry => {
             }
             displayValue = 0;            
             operation = keyEntry.id;
+            entryPostOperator = false;
         }
         else if(keyEntry.id == 'equals') {
-            if(operation != '') {
+            if(operation != '' && entryPostOperator) {
                 if(!equalSequence) {
                     valueY = +displayValue;
                 }
@@ -70,6 +71,7 @@ keyPad.forEach(keyEntry => {
         }
         else {
             equalSequence = false;
+            entryPostOperator = true;
             if(displayValue == 0) {
                 displayValue = keyEntry.id.toString();
             }
