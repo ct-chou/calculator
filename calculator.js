@@ -120,5 +120,9 @@ keyPad.forEach(keyEntry => {
                 displayScreen.textContent = scientificNotationFit(displayScreen.textContent, ePosition, 10);
             }
         }
+        if(displayScreenString == 'Infinity') {
+            displayScreen.textContent = 'Divide by zero??';
+        }
     });
+
 });
