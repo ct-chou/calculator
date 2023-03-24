@@ -30,6 +30,7 @@ keyPad.forEach(keyEntry => {
             valueX = 0;
             valueY = 0;
             operation = '';
+            displayScreen.textContent = displayValue;
         }
         else if(keyEntry.id == 'delete') {
             if(displayValue != 0) {
@@ -38,27 +39,28 @@ keyPad.forEach(keyEntry => {
             if(displayValue == '') {
                 displayValue = 0;
             }
+            displayScreen.textContent = displayValue;
         }
         else if(keyEntry.className == 'operator') {
             if(chaining) {
                 displayValue = operate(operation, valueX, +displayValue);
                 valueX = +displayValue;
-                displayScreen.textContent = displayValue;            
+                displayScreen.textContent = displayValue;
             }
             else {
                 valueX = +displayValue;
-                displayValue = 0;
+                displayScreen.textContent = displayValue;            
                 chaining = true;
             }
-            
+            displayValue = 0;            
             operation = keyEntry.id;
-            
         }
         else if(keyEntry.id == 'equals') {
             //todo: press equal before operator does nothing
             //todo: press equal 2x repeats the last operation 
             valueY = +displayValue;
             displayValue = operate(operation, valueX, valueY);
+            displayScreen.textContent = displayValue;
         }
         else {
             //todo: enter after chaining doesn't concat
@@ -68,7 +70,8 @@ keyPad.forEach(keyEntry => {
             else {
                 displayValue += keyEntry.id.toString();
             }
+            displayScreen.textContent = displayValue;
         }
-        displayScreen.textContent = displayValue;
+        
     });
 });
