@@ -23,6 +23,7 @@ let operation = '';
 let chaining = false; // multiple operations
 let equalSequence = true; // if True it means we hit = after = 
 let entryMade = false;
+let periodEntered = false;
 
 keyPad.forEach(keyEntry => {
     keyEntry.addEventListener('click', (e) => {
@@ -31,6 +32,7 @@ keyPad.forEach(keyEntry => {
             chaining = false;
             equalSequence = true;
             entryMade = false;
+            periodEntered = false;
             valueX = 0;
             valueY = 0;
             operation = '';
@@ -38,6 +40,9 @@ keyPad.forEach(keyEntry => {
         }
         else if(keyEntry.id == 'delete') {
             if(displayValue != 0) {
+                if(displayValue.substr(displayValue.length - 1) == '.') {
+                    periodEntered = false;
+                }
                 displayValue = displayValue.slice(0,-1);    
             }
             if(displayValue == '') {
@@ -57,6 +62,7 @@ keyPad.forEach(keyEntry => {
             displayValue = 0;            
             operation = keyEntry.id;
             entryMade = false;
+            periodEntered = false;
         }
         else if(keyEntry.id == 'equals') {
             if(operation != '' && entryMade) {
@@ -69,6 +75,7 @@ keyPad.forEach(keyEntry => {
                 displayValue = 0;
                 equalSequence = true;
                 chaining = false;
+                periodEntered = false;
             }
         }
         else {
@@ -78,9 +85,15 @@ keyPad.forEach(keyEntry => {
                 displayValue = keyEntry.id.toString();
             }
             else {
-                displayValue += keyEntry.id.toString();
+                if(!periodEntered || keyEntry.id.toString() != '.') {
+                    displayValue += keyEntry.id.toString();
+                }
+            }
+            if(keyEntry.id.toString() == '.') {
+                periodEntered = true;
             }
             displayScreen.textContent = displayValue;
+        
         }
         
     });
