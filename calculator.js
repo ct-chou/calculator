@@ -22,6 +22,7 @@ let valueY = 0;
 let operation = '';
 let chaining = false; // multiple operations
 let equalSequence = true; // if True it means we hit = after = 
+let entryMade = false;
 
 keyPad.forEach(keyEntry => {
     keyEntry.addEventListener('click', (e) => {
@@ -29,6 +30,7 @@ keyPad.forEach(keyEntry => {
             displayValue = 0;
             chaining = false;
             equalSequence = true;
+            entryMade = false;
             valueX = 0;
             valueY = 0;
             operation = '';
@@ -44,20 +46,20 @@ keyPad.forEach(keyEntry => {
             displayScreen.textContent = displayValue;
         }
         else if(keyEntry.className == 'operator') {
-            if(chaining) {
+            if(chaining && entryMade) {
                 displayValue = operate(operation, valueX, +displayValue);
             }
-            chaining = true;
-            if(!equalSequence) {
+            if(!equalSequence && entryMade) {
                 valueX = +displayValue;
                 displayScreen.textContent = displayValue;
             }
+            chaining = true;
             displayValue = 0;            
             operation = keyEntry.id;
-            entryPostOperator = false;
+            entryMade = false;
         }
         else if(keyEntry.id == 'equals') {
-            if(operation != '' && entryPostOperator) {
+            if(operation != '' && entryMade) {
                 if(!equalSequence) {
                     valueY = +displayValue;
                 }
@@ -71,7 +73,7 @@ keyPad.forEach(keyEntry => {
         }
         else {
             equalSequence = false;
-            entryPostOperator = true;
+            entryMade = true;
             if(displayValue == 0) {
                 displayValue = keyEntry.id.toString();
             }
